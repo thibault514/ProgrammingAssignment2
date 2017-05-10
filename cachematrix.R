@@ -14,13 +14,16 @@ makeCacheMatrix <- function(x = matrix()) {
   
   # resets all of the content to NULL       
   inverse <- NULL
+  # use the super assignment operator to give a value outside of this enviromnent
   set <- function(y) {
     x <<- y
     inverse <<- NULL
   }
+  # getters and setters...
   get <- function() x
   setinverse <- function(calculated_inverse) inverse <<- calculated_inverse
   getinverse <- function() inverse
+  # put all of these guys in a list
   list(set = set, get = get,
        setinverse = setinverse,
        getinverse = getinverse)
@@ -42,6 +45,7 @@ cacheSolve <- function(x, ...) {
   data <- x$get()
   my_inv=solve(data)
   x$setinverse(my_inv)
+  # return the inverse
   my_inv
   
 }
